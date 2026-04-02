@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <title>Başvuru Takip Uygulaması</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+<!-- GİRİŞ / KAYIT -->
+<div id="authRoot" class="auth-root">
+    <div class="auth-card">
+        <div class="auth-brand">
+            <div class="logo-icon auth-logo-icon">
+                <div class="logo-icon-inner">BT</div>
+            </div>
+            <div>
+                <div class="auth-title">BaşvuruTakip</div>
+                <div class="auth-sub">Giriş yapın veya kullanıcı olarak kayıt olun</div>
+            </div>
+        </div>
+
+        <div class="auth-split">
+            <form id="adminLoginForm" class="auth-form auth-form-box" autocomplete="on">
+                <div class="auth-form-title">Admin girişi</div>
+                <div class="form-field">
+                    <label for="adminEmail">E-posta</label>
+                    <input id="adminEmail" type="email" inputmode="email" value="admin@gmail.com" readonly />
+                </div>
+                <div class="form-field">
+                    <label for="adminPassword">Şifre</label>
+                    <input id="adminPassword" type="password" placeholder="Admin şifresi" required />
+                </div>
+                <button type="submit" class="btn btn-primary auth-submit">Admin giriş</button>
+            </form>
+
+            <form id="userLoginForm" class="auth-form auth-form-box" autocomplete="on">
+                <div class="auth-form-title">Kullanıcı girişi</div>
+                <div class="form-field">
+                    <label for="loginEmail">E-posta</label>
+                    <input id="loginEmail" type="email" inputmode="email" placeholder="ornek@mail.com" required />
+                </div>
+                <div class="form-field">
+                    <label for="loginPassword">Şifre</label>
+                    <input id="loginPassword" type="password" placeholder="••••••••" required />
+                </div>
+                <button type="submit" class="btn btn-primary auth-submit">Kullanıcı giriş</button>
+            </form>
+        </div>
+        <p id="authMessage" class="auth-message" role="status"></p>
+
+        <div id="registerBlock" class="register-block hidden">
+            <div class="auth-divider"><span>Yeni kullanıcı</span></div>
+            <form id="registerForm" class="auth-form" autocomplete="on">
+                <div class="form-field">
+                    <label for="regEmail">E-posta</label>
+                    <input id="regEmail" type="email" required />
+                </div>
+                <div class="form-field">
+                    <label for="regPassword">Şifre</label>
+                    <input id="regPassword" type="password" minlength="4" required />
+                </div>
+                <div class="form-field">
+                    <label for="regPassword2">Şifre tekrar</label>
+                    <input id="regPassword2" type="password" minlength="4" required />
+                </div>
+                <button type="submit" class="btn btn-primary auth-submit">Kayıt ol</button>
+            </form>
+        </div>
+
+        <div class="auth-footer">
+            <button type="button" id="toggleRegisterBtn" class="btn btn-outline auth-link-btn">Kullanıcı kaydı</button>
+        </div>
+    </div>
+</div>
+
+<div id="appRoot" class="app-root hidden">
+<div class="app-shell">
+    <!-- SOL PANEL / FİLTRELER -->
+    <aside class="sidebar">
+        <div class="logo">
+            <div class="logo-icon">
+                <div class="logo-icon-inner">BT</div>
+            </div>
+            <div>
+                <div class="logo-text-title">
+                    <span>BaşvuruTakip</span>
+                    <span>beta</span>
+                </div>
+                <div class="logo-sub">Başvurularını tek ekrandan takip et</div>
+            </div>
+        </div>
+
+        <div id="sessionBadge" class="session-badge">
+            <span id="sessionRoleLabel" class="session-role"></span>
+            <span id="sessionEmailLabel" class="session-email"></span>
+            <button type="button" id="logoutBtn" class="btn btn-outline btn-logout">Çıkış</button>
+        </div>
+
+        <div id="adminSidebarSection" class="admin-sidebar-section hidden">
+            <div class="section-label">YÖNETİCİ</div>
+            <div class="admin-mini-card">
+                <div class="admin-mini-title">Kayıtlı kullanıcılar</div>
+                <ul id="adminUserList" class="admin-user-list"></ul>
+                <p id="adminUserEmpty" class="admin-user-empty">Henüz kayıtlı kullanıcı yok.</p>
+            </div>
+        </div>
+
+        <div class="section-label">GENEL FİLTRELER</div>
+        <div class="filter-card">
+            <div class="filter-group">
+                <div class="label">Şirket / pozisyon</div>
+                <div class="pill-input">
+                    <span class="pill-badge">Ctrl + F</span>
+                    <input id="searchInput" type="text" placeholder="Şirket veya pozisyon ara" />
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <div class="label">Durum</div>
+                <div class="status-pills">
+                    <span class="status-pill active" data-status="Tümü">Tümü</span>
+                    <span class="status-pill" data-status="Başvuruldu">Başvuruldu</span>
+                    <span class="status-pill" data-status="İncelemede">İncelemede</span>
+                    <span class="status-pill" data-status="Mülakat">Mülakat</span>
+                    <span class="status-pill" data-status="Teklif">Teklif</span>
+                    <span class="status-pill" data-status="Olumsuz">Olumsuz</span>
+                </div>
+            </div>
+
+            <div class="filter-group">
+                <div class="label">Öncelik</div>
+                <div class="pill-input">
+                    <select id="prioritySelect">
+                        <option>Hepsi</option>
+                        <option>Yüksek</option>
+                        <option>Orta</option>
+                        <option>Düşük</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-label">ÖZET</div>
+        <div class="stat-card">
+            <div class="stat-row">
+                <span class="stat-label">Toplam başvuru</span>
+                <span class="stat-value">18</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Aktif süreç</span>
+                <span class="stat-badge success">7 aktif</span>
+            </div>
+            <div class="stat-row">
+                <span class="stat-label">Bekleyen geri dönüş</span>
+                <span class="stat-badge warning">3 kritik</span>
+            </div>
+        </div>
+    </aside>
+
+    <!-- ANA İÇERİK -->
+    <main class="main">
+        <div id="mainListView" class="main-list-view">
+        <header class="main-header">
+            <div class="main-title-block">
+                <div class="main-title">Başvuru listesi</div>
+                <div class="main-subtitle">
+                    HTML + CSS + JS ile filtreleme ve yeni başvuru ekleme örneği.
+                </div>
+            </div>
+            <div class="main-actions">
+                <button type="button" id="panelTag" class="panel-tag" aria-live="polite"></button>
+                <button class="btn btn-outline" id="resetFiltersBtn">
+                    <span class="btn-icon">⟳</span>
+                    Filtre sıfırla
+                </button>
+                <button id="newAppBtn" class="btn btn-primary">
+                    <span class="btn-icon">＋</span>
+                    Yeni başvuru
+                    <span class="btn-badge">form</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- YENİ BAŞVURU FORMU -->
+        <section class="form-card" id="newAppForm">
+            <form id="applicationForm">
+                <div class="form-grid">
+                    <div class="form-field">
+                        <label for="company">Şirket</label>
+                        <input id="company" type="text" placeholder="Örn: TechNova" required />
+                    </div>
+                    <div class="form-field">
+                        <label for="role">Pozisyon</label>
+                        <input id="role" type="text" placeholder="Örn: Frontend Developer" required />
+                    </div>
+                    <div class="form-field">
+                        <label for="status">Durum</label>
+                        <select id="status" required>
+                            <option value="Başvuruldu">Başvuruldu</option>
+                            <option value="İncelemede">İncelemede</option>
+                            <option value="Mülakat sürecinde">Mülakat sürecinde</option>
+                            <option value="Teklif alındı">Teklif alındı</option>
+                            <option value="Olumsuz">Olumsuz</option>
+                        </select>
+                    </div>
+
+                    <div class="form-field">
+                        <label for="priority">Öncelik</label>
+                        <select id="priority">
+                            <option value="Düşük">Düşük</option>
+                            <option value="Orta">Orta</option>
+                            <option value="Yüksek">Yüksek</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <label for="location">Konum</label>
+                        <input id="location" type="text" placeholder="İstanbul / Remote..." />
+                    </div>
+                    <div class="form-field">
+                        <label for="jobType">Çalışma tipi</label>
+                        <input id="jobType" type="text" placeholder="Tam zamanlı / Staj..." />
+                    </div>
+
+                    <div class="form-field">
+                        <label for="appliedAt">Başvuru tarihi</label>
+                        <input id="appliedAt" type="date" />
+                    </div>
+                    <div class="form-field">
+                        <label for="updatedAt">Son güncelleme</label>
+                        <input id="updatedAt" type="date" />
+                    </div>
+                    <div class="form-field">
+                        <label for="notes">Not</label>
+                        <textarea id="notes" rows="2" placeholder="Kısa not ekle..."></textarea>
+                    </div>
+                </div>
+
+                <div class="form-footer">
+                    <button type="button" class="btn btn-outline" id="cancelFormBtn">İptal</button>
+                    <button type="submit" class="btn btn-primary">Kaydet</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- TABLO -->
+        <section class="table-card">
+            <div class="table-header">
+                <div class="table-tabs">
+                    <span class="tab active" data-tab="tum">Tüm başvurular</span>
+                    <span class="tab" data-tab="aktif">Aktif süreç</span>
+                    <span class="tab" data-tab="beklemede">Beklemede</span>
+                </div>
+                <div class="table-meta">
+                    <span class="dot"></span>
+                    <span>Örnek veri · Sadece görünüm</span>
+                </div>
+            </div>
+
+            <div class="table-scroll">
+                <table>
+                    <thead>
+                    <tr>
+                        <th>Şirket / Pozisyon</th>
+                        <th>Durum</th>
+                        <th>Öncelik</th>
+                        <th>Konum / Tip</th>
+                        <th>Başvuru</th>
+                        <th>Son güncelleme</th>
+                        <th>Not</th>
+                        <th class="col-admin-only">İşlem</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <span class="company-name">TechNova</span>
+                                <span class="company-role">Frontend Developer</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-chip status-interview">
+                                <span></span> Mülakat sürecinde
+                            </span>
+                        </td>
+                        <td><span class="priority-pill priority-high">Yüksek</span></td>
+                        <td>
+                            <span class="tag-pill">Remote</span>
+                            <span class="tag-pill">Tam zamanlı</span>
+                        </td>
+                        <td><span class="date-muted">12 Şub 2026</span></td>
+                        <td><span class="date-muted">24 Şub 2026</span></td>
+                        <td class="notes">Teknik mülakat tamamlandı, HR dönüşü bekleniyor.</td>
+                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <span class="company-name">Finera</span>
+                                <span class="company-role">Jr. Software Engineer</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-chip status-review">
+                                <span></span> İncelemede
+                            </span>
+                        </td>
+                        <td><span class="priority-pill priority-medium">Orta</span></td>
+                        <td>
+                            <span class="tag-pill">İstanbul</span>
+                            <span class="tag-pill">Hibrit</span>
+                        </td>
+                        <td><span class="date-muted">08 Şub 2026</span></td>
+                        <td><span class="date-muted">20 Şub 2026</span></td>
+                        <td class="notes">LinkedIn üzerinden başvuruldu, henüz dönüş yok.</td>
+                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <span class="company-name">Cloudify</span>
+                                <span class="company-role">DevOps Intern</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-chip status-applied">
+                                <span></span> Başvuruldu
+                            </span>
+                        </td>
+                        <td><span class="priority-pill">Düşük</span></td>
+                        <td>
+                            <span class="tag-pill">Remote</span>
+                            <span class="tag-pill">Staj</span>
+                        </td>
+                        <td><span class="date-muted">15 Şub 2026</span></td>
+                        <td><span class="date-muted">15 Şub 2026</span></td>
+                        <td class="notes">Mail ile CV gönderildi.</td>
+                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <span class="company-name">DataMind</span>
+                                <span class="company-role">Data Analyst</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-chip status-offer">
+                                <span></span> Teklif alındı
+                            </span>
+                        </td>
+                        <td><span class="priority-pill priority-high">Yüksek</span></td>
+                        <td>
+                            <span class="tag-pill">Ankara</span>
+                            <span class="tag-pill">Ofis</span>
+                        </td>
+                        <td><span class="date-muted">05 Oca 2026</span></td>
+                        <td><span class="date-muted">22 Oca 2026</span></td>
+                        <td class="notes">Teklif değerlendiriliyor, son tarih 1 Mart.</td>
+                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <span class="company-name">PixelCraft</span>
+                                <span class="company-role">UI/UX Designer</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-chip status-rejected">
+                                <span></span> Olumsuz
+                            </span>
+                        </td>
+                        <td><span class="priority-pill">Düşük</span></td>
+                        <td>
+                            <span class="tag-pill">Remote</span>
+                            <span class="tag-pill">Freelance</span>
+                        </td>
+                        <td><span class="date-muted">18 Ara 2025</span></td>
+                        <td><span class="date-muted">10 Oca 2026</span></td>
+                        <td class="notes">Portföyün rol gereksinimlerine tam uymadığı belirtildi.</td>
+                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <div class="company-cell">
+                                <span class="company-name">NeoBank</span>
+                                <span class="company-role">Backend Developer</span>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-chip status-review">
+                                <span></span> İncelemede
+                            </span>
+                        </td>
+                        <td><span class="priority-pill priority-medium">Orta</span></td>
+                        <td>
+                            <span class="tag-pill">İstanbul</span>
+                            <span class="tag-pill">Tam zamanlı</span>
+                        </td>
+                        <td><span class="date-muted">01 Şub 2026</span></td>
+                        <td><span class="date-muted">17 Şub 2026</span></td>
+                        <td class="notes">Referans ile iletildi. Geri dönüş için 2 hafta süre verildi.</td>
+                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        </div>
+
+        <!-- KULLANICI PANELİ -->
+        <div id="userPanelView" class="user-panel-view hidden" aria-hidden="true">
+            <header class="user-panel-header">
+                <div>
+                    <div class="main-title">Kullanıcı paneli</div>
+                    <div class="main-subtitle">Hesap bilgileriniz ve özet</div>
+                </div>
+                <button type="button" id="backToListFromUserBtn" class="btn btn-outline">
+                    <span class="btn-icon">←</span>
+                    Başvuru listesine dön
+                </button>
+            </header>
+
+            <div class="user-panel-grid">
+                <section class="user-info-card">
+                    <h2 class="user-info-card-title">Profil</h2>
+                    <dl class="user-info-dl">
+                        <div><dt>E-posta</dt><dd id="userPanelEmail">—</dd></div>
+                        <div><dt>Hesap türü</dt><dd>Standart kullanıcı</dd></div>
+                        <div><dt>Üyelik tarihi</dt><dd id="userPanelRegistered">—</dd></div>
+                    </dl>
+                </section>
+                <section class="user-info-card">
+                    <h2 class="user-info-card-title">Oturum</h2>
+                    <dl class="user-info-dl">
+                        <div><dt>Son giriş</dt><dd id="userPanelLastLogin">—</dd></div>
+                    </dl>
+                </section>
+                <section class="user-info-card user-info-card-wide">
+                    <h2 class="user-info-card-title">Başvurularınız</h2>
+                    <p class="user-info-lead">
+                        Listeye sizin eklediğiniz kayıtlar hesabınıza bağlanır.
+                    </p>
+                    <dl class="user-info-dl">
+                        <div><dt>Eklediğiniz başvuru sayısı</dt><dd id="userPanelOwnCount">0</dd></div>
+                        <div><dt>Listede görünen toplam kayıt</dt><dd id="userPanelTotalCount">0</dd></div>
+                    </dl>
+                </section>
+            </div>
+        </div>
+
+        <!-- YÖNETİCİ PANELİ (tam sayfa özet) -->
+        <div id="adminPanelView" class="user-panel-view admin-panel-page hidden" aria-hidden="true">
+            <header class="user-panel-header">
+                <div>
+                    <div class="main-title">Yönetici paneli</div>
+                    <div class="main-subtitle">Özet, kullanıcı yönetimi ve sistem işlemleri</div>
+                </div>
+                <button type="button" id="backToListFromAdminBtn" class="btn btn-outline">
+                    <span class="btn-icon">←</span>
+                    Başvuru listesine dön
+                </button>
+            </header>
+            <div class="user-panel-grid">
+                <section class="user-info-card user-info-card-wide">
+                    <h2 class="user-info-card-title">Özet</h2>
+                    <dl class="user-info-dl">
+                        <div><dt>Yönetici e-postası</dt><dd id="adminPanelEmail">—</dd></div>
+                        <div><dt>Kayıtlı kullanıcı sayısı</dt><dd id="adminPanelUserCount">0</dd></div>
+                        <div><dt>Tablodaki başvuru sayısı</dt><dd id="adminPanelRowCount">0</dd></div>
+                    </dl>
+                </section>
+                <section class="user-info-card user-info-card-wide">
+                    <h2 class="user-info-card-title">Yönetim işlemleri</h2>
+                    <div class="admin-actions">
+                        <button type="button" id="adminClearAppsBtn" class="btn btn-outline admin-danger-btn">
+                            Tüm başvuruları temizle
+                        </button>
+                    </div>
+                    <p id="adminActionMessage" class="admin-action-message" role="status"></p>
+                </section>
+                <section class="user-info-card user-info-card-wide">
+                    <h2 class="user-info-card-title">Kullanıcı listesi</h2>
+                    <div class="admin-panel-table-wrap">
+                        <table class="admin-panel-table">
+                            <thead>
+                                <tr>
+                                    <th>E-posta</th>
+                                    <th>Üyelik tarihi</th>
+                                    <th>Eklediği başvuru</th>
+                                    <th>İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminPanelUserTableBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="adminPanelUserListEmpty" class="admin-user-empty">Kayıtlı kullanıcı yok.</p>
+                </section>
+            </div>
+        </div>
+    </main>
+</div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
