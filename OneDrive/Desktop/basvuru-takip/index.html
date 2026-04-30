@@ -243,177 +243,52 @@
             </form>
         </section>
 
-        <!-- TABLO -->
-        <section class="table-card">
+        <section id="adminApplicationsTable" class="table-card hidden">
             <div class="table-header">
                 <div class="table-tabs">
                     <span class="tab active" data-tab="tum">Tüm başvurular</span>
-                    <span class="tab" data-tab="aktif">Aktif süreç</span>
+                    <span class="tab" data-tab="aktif">Aktif</span>
                     <span class="tab" data-tab="beklemede">Beklemede</span>
                 </div>
                 <div class="table-meta">
                     <span class="dot"></span>
-                    <span>Örnek veri · Sadece görünüm</span>
+                    <span>Admin tüm kayıtları görür</span>
                 </div>
             </div>
-
-            <div class="table-scroll">
+            <div class="table-wrap">
                 <table>
                     <thead>
-                    <tr>
-                        <th>Şirket / Pozisyon</th>
-                        <th>Durum</th>
-                        <th>Öncelik</th>
-                        <th>Konum / Tip</th>
-                        <th>Başvuru</th>
-                        <th>Son güncelleme</th>
-                        <th>Not</th>
-                        <th class="col-admin-only">İşlem</th>
-                    </tr>
+                        <tr>
+                            <th>Şirket / Pozisyon</th>
+                            <th>Durum</th>
+                            <th>Öncelik</th>
+                            <th>Konum / Tip</th>
+                            <th>Başvuru</th>
+                            <th>Güncelleme</th>
+                            <th>Not</th>
+                            <th class="col-admin-only">İşlem</th>
+                        </tr>
                     </thead>
-                    <tbody>
-                    <tr>
-                        <td>
-                            <div class="company-cell">
-                                <span class="company-name">TechNova</span>
-                                <span class="company-role">Frontend Developer</span>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="status-chip status-interview">
-                                <span></span> Mülakat sürecinde
-                            </span>
-                        </td>
-                        <td><span class="priority-pill priority-high">Yüksek</span></td>
-                        <td>
-                            <span class="tag-pill">Remote</span>
-                            <span class="tag-pill">Tam zamanlı</span>
-                        </td>
-                        <td><span class="date-muted">12 Şub 2026</span></td>
-                        <td><span class="date-muted">24 Şub 2026</span></td>
-                        <td class="notes">Teknik mülakat tamamlandı, HR dönüşü bekleniyor.</td>
-                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="company-cell">
-                                <span class="company-name">Finera</span>
-                                <span class="company-role">Jr. Software Engineer</span>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="status-chip status-review">
-                                <span></span> İncelemede
-                            </span>
-                        </td>
-                        <td><span class="priority-pill priority-medium">Orta</span></td>
-                        <td>
-                            <span class="tag-pill">İstanbul</span>
-                            <span class="tag-pill">Hibrit</span>
-                        </td>
-                        <td><span class="date-muted">08 Şub 2026</span></td>
-                        <td><span class="date-muted">20 Şub 2026</span></td>
-                        <td class="notes">LinkedIn üzerinden başvuruldu, henüz dönüş yok.</td>
-                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="company-cell">
-                                <span class="company-name">Cloudify</span>
-                                <span class="company-role">DevOps Intern</span>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="status-chip status-applied">
-                                <span></span> Başvuruldu
-                            </span>
-                        </td>
-                        <td><span class="priority-pill">Düşük</span></td>
-                        <td>
-                            <span class="tag-pill">Remote</span>
-                            <span class="tag-pill">Staj</span>
-                        </td>
-                        <td><span class="date-muted">15 Şub 2026</span></td>
-                        <td><span class="date-muted">15 Şub 2026</span></td>
-                        <td class="notes">Mail ile CV gönderildi.</td>
-                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="company-cell">
-                                <span class="company-name">DataMind</span>
-                                <span class="company-role">Data Analyst</span>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="status-chip status-offer">
-                                <span></span> Teklif alındı
-                            </span>
-                        </td>
-                        <td><span class="priority-pill priority-high">Yüksek</span></td>
-                        <td>
-                            <span class="tag-pill">Ankara</span>
-                            <span class="tag-pill">Ofis</span>
-                        </td>
-                        <td><span class="date-muted">05 Oca 2026</span></td>
-                        <td><span class="date-muted">22 Oca 2026</span></td>
-                        <td class="notes">Teklif değerlendiriliyor, son tarih 1 Mart.</td>
-                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="company-cell">
-                                <span class="company-name">PixelCraft</span>
-                                <span class="company-role">UI/UX Designer</span>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="status-chip status-rejected">
-                                <span></span> Olumsuz
-                            </span>
-                        </td>
-                        <td><span class="priority-pill">Düşük</span></td>
-                        <td>
-                            <span class="tag-pill">Remote</span>
-                            <span class="tag-pill">Freelance</span>
-                        </td>
-                        <td><span class="date-muted">18 Ara 2025</span></td>
-                        <td><span class="date-muted">10 Oca 2026</span></td>
-                        <td class="notes">Portföyün rol gereksinimlerine tam uymadığı belirtildi.</td>
-                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
-                    </tr>
-
-                    <tr>
-                        <td>
-                            <div class="company-cell">
-                                <span class="company-name">NeoBank</span>
-                                <span class="company-role">Backend Developer</span>
-                            </div>
-                        </td>
-                        <td>
-                            <span class="status-chip status-review">
-                                <span></span> İncelemede
-                            </span>
-                        </td>
-                        <td><span class="priority-pill priority-medium">Orta</span></td>
-                        <td>
-                            <span class="tag-pill">İstanbul</span>
-                            <span class="tag-pill">Tam zamanlı</span>
-                        </td>
-                        <td><span class="date-muted">01 Şub 2026</span></td>
-                        <td><span class="date-muted">17 Şub 2026</span></td>
-                        <td class="notes">Referans ile iletildi. Geri dönüş için 2 hafta süre verildi.</td>
-                        <td class="col-admin-only"><button type="button" class="btn-row-delete" title="Sil">Sil</button></td>
-                    </tr>
-
-                    </tbody>
+                    <tbody id="appsTableBody"></tbody>
                 </table>
             </div>
         </section>
+
+        <section id="userJobBoard" class="table-card hidden">
+            <div class="table-header">
+                <div class="table-tabs">
+                    <span class="tab active">Size uygun ilanlar</span>
+                </div>
+                <div class="table-meta">
+                    <span class="dot"></span>
+                    <span>Karttan hızlı başvuru</span>
+                </div>
+            </div>
+            <div id="jobBoardGrid" class="job-board-grid"></div>
+            <p id="userJobBoardMessage" class="admin-action-message" role="status"></p>
+        </section>
+
+      
         </div>
 
         <!-- KULLANICI PANELİ -->
@@ -454,6 +329,24 @@
                         <div><dt>Listede görünen toplam kayıt</dt><dd id="userPanelTotalCount">0</dd></div>
                     </dl>
                 </section>
+                <section class="user-info-card user-info-card-wide">
+                    <h2 class="user-info-card-title">Eklediğiniz başvurular</h2>
+                    <div class="admin-panel-table-wrap">
+                        <table class="admin-panel-table">
+                            <thead>
+                                <tr>
+                                    <th>Şirket / Pozisyon</th>
+                                    <th>Durum</th>
+                                    <th>Öncelik</th>
+                                    <th>Başvuru tarihi</th>
+                                    <th>Not</th>
+                                </tr>
+                            </thead>
+                            <tbody id="userPanelAppsTableBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="userPanelAppsEmpty" class="admin-user-empty">Henüz eklediğiniz bir başvuru yok.</p>
+                </section>
             </div>
         </div>
 
@@ -461,7 +354,7 @@
         <div id="adminPanelView" class="user-panel-view admin-panel-page hidden" aria-hidden="true">
             <header class="user-panel-header">
                 <div>
-                    <div class="main-title">Yönetici paneli</div>
+                    <div class="main-title">Admin paneli</div>
                     <div class="main-subtitle">Özet, kullanıcı yönetimi ve sistem işlemleri</div>
                 </div>
                 <button type="button" id="backToListFromAdminBtn" class="btn btn-outline">
@@ -487,6 +380,25 @@
                     </div>
                     <p id="adminActionMessage" class="admin-action-message" role="status"></p>
                 </section>
+
+                <section class="user-info-card user-info-card-wide">
+                    <h2 class="user-info-card-title">Gelen başvurular</h2>
+                    <div class="admin-panel-table-wrap">
+                        <table class="admin-panel-table">
+                            <thead>
+                                <tr>
+                                    <th>Aday</th>
+                                    <th>İlan</th>
+                                    <th>İletişim</th>
+                                    <th>Başvuru tarihi</th>
+                                    <th>Not</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminAppsTableBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="adminAppsEmpty" class="admin-user-empty">Henüz başvuru yok.</p>
+                </section>
                 <section class="user-info-card user-info-card-wide">
                     <h2 class="user-info-card-title">Kullanıcı listesi</h2>
                     <div class="admin-panel-table-wrap">
@@ -503,6 +415,63 @@
                         </table>
                     </div>
                     <p id="adminPanelUserListEmpty" class="admin-user-empty">Kayıtlı kullanıcı yok.</p>
+                </section>
+
+                <section class="user-info-card user-info-card-wide">
+                    <h2 class="user-info-card-title">İş ilanları</h2>
+                    <form id="adminJobCreateForm" class="admin-job-form">
+                        <div class="form-grid">
+                            <div class="form-field">
+                                <label for="jobCompany">Şirket</label>
+                                <input id="jobCompany" type="text" placeholder="Örn: TechNova" required />
+                            </div>
+                            <div class="form-field">
+                                <label for="jobRole">Pozisyon</label>
+                                <input id="jobRole" type="text" placeholder="Örn: Frontend Developer" required />
+                            </div>
+                            <div class="form-field">
+                                <label for="jobLocation">Konum</label>
+                                <input id="jobLocation" type="text" placeholder="İstanbul / Remote..." />
+                            </div>
+                            <div class="form-field">
+                                <label for="jobType2">Çalışma tipi</label>
+                                <input id="jobType2" type="text" placeholder="Tam zamanlı / Staj..." />
+                            </div>
+                            <div class="form-field">
+                                <label for="jobPriority">Öncelik</label>
+                                <select id="jobPriority">
+                                    <option value="Düşük">Düşük</option>
+                                    <option value="Orta">Orta</option>
+                                    <option value="Yüksek">Yüksek</option>
+                                </select>
+                            </div>
+                            <div class="form-field">
+                                <label for="jobSummary">Açıklama (kısa)</label>
+                                <input id="jobSummary" type="text" placeholder="Kısa açıklama..." />
+                            </div>
+                        </div>
+                        <div class="form-footer">
+                            <button type="submit" class="btn btn-primary">İlan ekle</button>
+                        </div>
+                    </form>
+
+                    <div class="admin-panel-table-wrap">
+                        <table class="admin-panel-table">
+                            <thead>
+                                <tr>
+                                    <th>İlan</th>
+                                    <th>Konum</th>
+                                    <th>Tip</th>
+                                    <th>Öncelik</th>
+                                    <th>Durum</th>
+                                    <th>İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody id="adminJobsTableBody"></tbody>
+                        </table>
+                    </div>
+                    <p id="adminJobsEmpty" class="admin-user-empty">Henüz iş ilanı yok.</p>
+                    <p id="adminJobsMessage" class="admin-action-message" role="status"></p>
                 </section>
             </div>
         </div>
