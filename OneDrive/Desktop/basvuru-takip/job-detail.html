@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>İş İlanı Başvuru Detayı</title>
+    <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+<main class="job-detail-page">
+    <section class="job-detail-card">
+        <h1>İş İlanı Başvurusu</h1>
+        <p class="job-detail-sub">Seçtiğiniz ilan için başvuruyu aşağıdan tamamlayın.</p>
+
+        <div class="job-detail-meta">
+            <div><strong>Şirket:</strong> <span id="detailCompany">-</span></div>
+            <div><strong>Pozisyon:</strong> <span id="detailRole">-</span></div>
+            <div><strong>Konum:</strong> <span id="detailLocation">-</span></div>
+            <div><strong>Çalışma tipi:</strong> <span id="detailJobType">-</span></div>
+            <div><strong>Öncelik:</strong> <span id="detailPriority">-</span></div>
+        </div>
+
+        <form id="jobDetailForm" class="job-detail-form">
+            <div class="form-grid">
+                <div class="form-field">
+                    <label for="candidateName">Ad soyad</label>
+                    <input id="candidateName" type="text" placeholder="Ad Soyad" required />
+                </div>
+                <div class="form-field">
+                    <label for="candidatePhone">Telefon</label>
+                    <input id="candidatePhone" type="tel" placeholder="05xx xxx xx xx" required />
+                </div>
+                <div class="form-field">
+                    <label for="candidateLinkedIn">LinkedIn (opsiyonel)</label>
+                    <input id="candidateLinkedIn" type="url" placeholder="https://linkedin.com/in/..." />
+                </div>
+                <div class="form-field">
+                    <label for="candidateCvUrl">CV linki (opsiyonel)</label>
+                    <input id="candidateCvUrl" type="url" placeholder="https://drive.google.com/..." />
+                </div>
+            </div>
+            <div class="form-field">
+                <label for="candidateNote">Kısa not</label>
+                <textarea id="candidateNote" rows="3" placeholder="Başvuru notu..."></textarea>
+            </div>
+            <div class="job-detail-actions">
+                <button type="button" id="backHomeBtn" class="btn btn-outline">Vazgeç</button>
+                <button type="submit" class="btn btn-primary">Başvuruyu Onayla</button>
+            </div>
+        </form>
+
+        <p id="jobDetailMessage" class="admin-action-message" role="status"></p>
+    </section>
+</main>
+<script src="job-detail.js"></script>
+</body>
+</html>

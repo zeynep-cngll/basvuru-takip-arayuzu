@@ -438,6 +438,15 @@ body[data-role="user"] .col-admin-only {
   display: none !important;
 }
 
+/* Admin sadece kontrol: başvuru ekleme kapalı */
+body[data-role="admin"] #newAppBtn {
+  display: none !important;
+}
+
+body[data-role="admin"] #newAppForm {
+  display: none !important;
+}
+
 .btn-row-delete {
   font-size: 12px;
   padding: 4px 10px;
@@ -800,6 +809,97 @@ body {
   );
   box-shadow: 0 14px 32px rgba(15, 23, 42, 0.9);
   overflow: hidden;
+}
+
+.job-board-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  padding: 14px;
+}
+
+@media (min-width: 1280px) {
+  .job-board-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+.job-posting-card {
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 14px;
+  background: rgba(15, 23, 42, 0.75);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.job-posting-card h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+.job-posting-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.job-posting-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.job-apply-btn {
+  align-self: flex-start;
+}
+
+.job-detail-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.job-detail-card {
+  width: min(760px, 100%);
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.9);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.job-detail-card h1 {
+  margin: 0;
+}
+
+.job-detail-sub {
+  margin: 0;
+  color: var(--muted);
+}
+
+.job-detail-meta {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 8px;
+  font-size: 14px;
+}
+
+.job-detail-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.job-detail-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
 }
 
 .table-header {
